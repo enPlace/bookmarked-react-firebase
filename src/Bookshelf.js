@@ -15,12 +15,9 @@ const Bookshelf = ({ userId }) => {
   });
   const populateDefault = async (book, userId) => {
     const docData = book;
-    const docRef = await setDoc(doc(firestore, userId, book.id), docData);
-    console.log("thisisdocref", docRef);
+    await setDoc(doc(firestore, userId, book.id), docData);
+   
   };
-  /*     defaultLibrary.forEach(book=>{
-        populateDefault(book)
-    }) */
   if (status === "loading") {
     return <h1>Loading...</h1>;
   } else if (booksData[0] === undefined) {
@@ -37,7 +34,7 @@ const Bookshelf = ({ userId }) => {
       <div className="Bookshelf">
         {console.log(booksData)}
         {booksData.map(book=>{
-            return <Book bookObj = {book}></Book>
+            return <Book userId = {userId} book = {book}></Book>
         })}
       </div>
     );

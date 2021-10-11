@@ -48,7 +48,7 @@ export const defaultLibrary = [
     author: "Jean-Paul Sartre",
     read: true,
     isbn: "1400076323",
-    imgsrc: "./images/sartre.jpg",
+    imgsrc: "http://books.google.com/books/content?id=EAsQAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     dateAdded: new Date(),
   },
   {
@@ -57,7 +57,7 @@ export const defaultLibrary = [
     author: "Lawrence Weschler",
     read: true,
     isbn: "9780226893969",
-    imgsrc: "./images/weschler.jpg",
+    imgsrc: "http://books.google.com/books/content?id=3TFYOUCBGsUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
     dateAdded: new Date(),
   },
   {
@@ -66,16 +66,17 @@ export const defaultLibrary = [
     author: "Jorge Louis Borges",
     read: true,
     isbn: "8426405738",
-    imgsrc: "./images/borges.jpg",
+    imgsrc: 	"http://books.google.com/books/content?id=oc5iAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     dateAdded: new Date(),
   },
+
   {
     id: "book07",
     name: "Something Deeply Hidden: Quantum Worlds and the Emergence of Spacetime",
     author: "Sean Carroll",
     read: false,
     isbn: "9781524743017",
-    imgsrc: "./images/carroll.jpg",
+    imgsrc: "http://books.google.com/books/content?id=f16IDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
     dateAdded: new Date(),
   },
   {
@@ -84,7 +85,7 @@ export const defaultLibrary = [
     author: "Douglas Hofstadter",
     read: true,
     isbn: "0465026567",
-    imgsrc: "./images/hofstadter.jpg",
+    imgsrc: "http://books.google.com/books/content?id=63yk44Sc59EC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     dateAdded: new Date(),
   },
   {
@@ -93,7 +94,7 @@ export const defaultLibrary = [
     author: "Gale Laakmann McDowell",
     read: false,
     isbn: " 0984782869",
-    imgsrc: "./images/mcdowell.jpg",
+    imgsrc: "http://books.google.com/books/content?id=jD8iswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     dateAdded: new Date(),
   },
   {

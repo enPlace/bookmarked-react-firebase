@@ -45,7 +45,7 @@ const App = () => {
           sign out
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
-          <h1>🌯</h1>
+
 
           <Bookshelf userId={user.uid}></Bookshelf>
         </FirestoreProvider>
