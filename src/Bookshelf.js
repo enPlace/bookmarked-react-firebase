@@ -1,7 +1,9 @@
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
 import { setDoc, getDocs, doc, collection, query } from "@firebase/firestore";
 import { defaultLibrary } from "./default";
-const Bookshelf =  ({ userId }) => {
+import Book from "./Book";
+import "./Bookshelf.css"
+const Bookshelf = ({ userId }) => {
   //check to see if there is a collection with the user's id
   // if it doesn't,
 
@@ -30,7 +32,15 @@ const Bookshelf =  ({ userId }) => {
         })}
       </div>
     );
-  } else return <div>{console.log(booksData)}check console</div>;
+  } else
+    return (
+      <div className="Bookshelf">
+        {console.log(booksData)}
+        {booksData.map(book=>{
+            return <Book bookObj = {book}></Book>
+        })}
+      </div>
+    );
 };
 
 export default Bookshelf;
