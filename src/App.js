@@ -1,9 +1,6 @@
 import { getFirestore } from "@firebase/firestore";
-import {
-  useFirebaseApp,
-  FirestoreProvider,
-  useUser,
-} from "reactfire";
+import Bookshelf from "./Bookshelf";
+import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 
 import {
   getAuth,
@@ -28,7 +25,7 @@ const App = () => {
     console.log(user);
     return <span>loading...</span>;
   }
-  if (!user) {
+  else if (!user) {
     console.log(user);
     return (
       <div>
@@ -38,7 +35,7 @@ const App = () => {
   } else
     return (
       <div>
-        {console.log(user.uid)}
+        {console.log("useridteat", user.uid)}
         <h1>Welcome Back, {user.displayName}!</h1>
         <button
           onClick={() => {
@@ -49,7 +46,8 @@ const App = () => {
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
           <h1>🌯</h1>
-    
+
+          <Bookshelf userId={user.uid}></Bookshelf>
         </FirestoreProvider>
       </div>
     );
