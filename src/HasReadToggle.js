@@ -6,12 +6,13 @@ const HasReadToggle = ({ book, userId }) => {
   const [read, setRead] = useState(book.read);
   const firestore = useFirestore();
   const toggleHasRead = async () => {
+    setRead(!read)
     await setDoc(
       doc(firestore, userId, book.id),
       { read: !read },
       { merge: true }
     );
-    setRead(!read)
+    
   };
   return read ? (
     <div className="has-read">
