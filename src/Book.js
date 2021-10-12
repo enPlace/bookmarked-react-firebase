@@ -1,6 +1,5 @@
 import HasReadToggle from "./HasReadToggle";
 import { doc, deleteDoc } from "firebase/firestore";
-
 import { useFirestore } from "reactfire";
 const Book = ({ book, userId }) => {
   const firestore = useFirestore();

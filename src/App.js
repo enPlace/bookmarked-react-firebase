@@ -1,7 +1,9 @@
 import { getFirestore } from "@firebase/firestore";
 import Bookshelf from "./Bookshelf";
+import AddBookModal from "./AddBookModal";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
-
+import { useState } from "react";
+import "./Modals.css";
 import {
   getAuth,
   signOut,
@@ -10,6 +12,7 @@ import {
 } from "@firebase/auth";
 
 const App = () => {
+  const [showAddBookModal, setShowAddBookModal] = useState(false);
   const firestoreInstance = getFirestore(useFirebaseApp());
   const auth = getAuth(useFirebaseApp());
   const { userStatus, data: user } = useUser();
@@ -24,8 +27,7 @@ const App = () => {
   if (userStatus === "loading") {
     console.log(user);
     return <span>loading...</span>;
-  }
-  else if (!user) {
+  } else if (!user) {
     console.log(user);
     return (
       <div>
@@ -45,9 +47,15 @@ const App = () => {
           sign out
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
-
-
-          <Bookshelf userId={user.uid}></Bookshelf>
+          <AddBookModal
+            showAddBookModal={showAddBookModal}
+            setShowAddBookModal={setShowAddBookModal}
+          />
+          <Bookshelf
+            userId={user.uid}
+            showAddBookModal={showAddBookModal}
+            setShowAddBookModal={setShowAddBookModal}
+          ></Bookshelf>
         </FirestoreProvider>
       </div>
     );

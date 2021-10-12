@@ -17,7 +17,7 @@ const HasReadToggle = ({ book, userId }) => {
   return read ? (
     <div className="has-read">
       <div>Read</div>
-      <label class="switch">
+      <label className="switch">
         <input data-bookid={book.id} type="checkbox" checked  onChange = {toggleHasRead}/>
         <span className="slider round"></span>
       </label>
@@ -25,9 +25,9 @@ const HasReadToggle = ({ book, userId }) => {
   ) : (
     <div className="has-read">
       <div>Not read</div>
-      <label class="switch">
+      <label className="switch">
         <input data-bookid={book.id} type="checkbox"onChange = {toggleHasRead} />
-        <span class="slider round"></span>
+        <span className="slider round"></span>
       </label>
     </div>
   );

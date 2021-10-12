@@ -1,0 +1,77 @@
+.modal {
+  position: fixed;
+ top: 100%;
+ right: 100%;
+  transform: translate(-50%, -50%)  ;
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1) .5s;
+  color: white;
+  border-radius: 20px;
+  z-index: 20;
+
+  background-color: rgb(216, 216, 216);
+  /* background-image: linear-gradient(to top, rgba(85, 85, 85, 0.842),rgb(150, 149, 153)); */
+
+  width: 500px;
+  max-width: 80%;
+  padding: 40px;
+
+  color: rgb(0, 0, 0);
+}
+
+.modal.active {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+
+
+}
+.modal h1 {
+  font-size: x-large;
+  font-family: "Special Elite", cursive;
+}
+button {
+  cursor: pointer;
+  font-family: "Special Elite", cursive;
+  width: 50px;
+  height: 30px;
+}
+.modal-header {
+  display: flex;
+  padding: 10px 15px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 6px solid rgb(58, 58, 58);
+}
+.modal-header button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content button {
+  margin: 5px;
+  width: 120px;
+  height: 30px;
+}
+#add-book-modal {
+  width: 300px;
+  height: 450px;
+}
+#add-book-modal input {
+  width: 300px;
+  height: 25px;
+  font-size: 18px;
+}
+#cbox1 {
+  width: 20px !important;
+}
+#form-checkbox {
+  display: flex;
+  align-items: center;
+}
