@@ -22,6 +22,7 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1) .5s;
 
 
 }
@@ -74,4 +75,162 @@ button {
 #form-checkbox {
   display: flex;
   align-items: center;
+}
+
+#delete-modal{
+  padding: 20px;
+  width: 300px;
+}
+#book-search-modal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  
+}
+#booksearch-img img{
+  width: 150px;
+
+}
+#booksearch-author{
+  text-align: center;
+}
+#booksearch-title{
+  text-align: center;
+}
+#book-list-modal{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 550px;
+  width: 500px;
+  padding: 15px;
+  
+}
+#book-list-modal form{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  
+}
+#book-list-modal button{
+  width: 120px;
+  height: 40px;
+}
+#book-results-container{
+  overflow-y: scroll;
+  background-color: rgb(148, 148, 148);
+  border-radius: 5px;
+  height:700px;
+  background-image: linear-gradient(to bottom, rgba(184, 182, 182, 0.842),rgb(204, 203, 206)); 
+}
+.list-item-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+}
+.list-item-container img{
+  width: 50px;
+  margin-top: 10px;
+}
+.list-item-container:hover{
+  cursor: pointer;
+  background-color: rgb(170, 203, 238)
+  
+
+}
+.list-item-container .list-item-author{
+  width: 75px;
+  flex-wrap: wrap;
+  overflow-wrap: break-word;
+}
+.list-item-title{
+  width: 140px; 
+  flex-wrap: wrap;
+}
+.list-item-thumb{
+  width: 50px;
+  overflow: hidden;
+}
+#overlay{
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0; 
+  bottom: 0; 
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+#overlay.active{
+  opacity: 1; 
+  pointer-events: all;
+  z-index: 19;
+}
+
+@media only screen and (max-width: 759px) {
+  .modal{
+      max-width: 350px;
+  }
+  h1{
+      font-size:20px !important;
+  }
+  h2{
+      font-size: 15px !important;
+  }
+}
+
+@media only screen and (max-width: 559px) {
+
+  #book-list-modal{
+      max-height: 475px;
+      max-width: 300px ;
+      padding: 10px;
+  }
+  #add-book-modal{
+      max-width: 250px;
+      height: 375px;
+      padding: 10px;
+      top: 40%;
+  }
+  #add-book-modal br{
+      display: none;
+  }
+  #add-book-modal .modal-header{
+      margin-bottom:10px;
+  }
+  .inf{
+      margin: 10px;
+  }
+  .title{margin-top: 5px; }
+  #book-search-modal{
+      max-width: 200px;
+      max-height: 425px;
+      padding: 50px;
+  }#book-search-modal button{
+      width: 70px;
+      margin: 10px;
+  }
+  .add-button{
+      display: flex;
+      justify-content: center;
+  }
+  .modal input{
+      width: 90% !important;
+  }
+  h1{
+      font-size: 19px;
+  }
+  .list-item-title{
+      width: 100px;   
+  }
+  .list-item-container{
+      margin-top: 20px;
+  }
+  #error-modal{
+      max-width: 200px;
+      padding: 30px;
+  }
 }

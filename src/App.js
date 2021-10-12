@@ -1,6 +1,8 @@
 import { getFirestore } from "@firebase/firestore";
 import Bookshelf from "./Bookshelf";
 import AddBookModal from "./AddBookModal";
+import BookSearchModal from "./BookSearchModal";
+import BookListModal from "./BookListModal";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
 import "./Modals.css";
@@ -13,6 +15,10 @@ import {
 
 const App = () => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
+  const [showBookSearchModal, setShowBookSearchModal] = useState(false);
+  const [showBookListModal, setShowBookListModal] = useState(false);
+  const [searchResults, setSearchResults] = useState(false)
+  const [firstResult, setFirstResult] = useState(false)
   const firestoreInstance = getFirestore(useFirebaseApp());
   const auth = getAuth(useFirebaseApp());
   const { userStatus, data: user } = useUser();
@@ -50,6 +56,27 @@ const App = () => {
           <AddBookModal
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
+            setShowBookSearchModal={setShowBookSearchModal}
+            setSearchResults = {setSearchResults}
+            setFirstResult = { setFirstResult}
+          />
+          <BookSearchModal
+            showBookSearchModal={showBookSearchModal}
+            setShowBookSearchModal={setShowBookSearchModal}
+            setShowAddBookModal={setShowAddBookModal}
+            setShowBookListModal={setShowBookListModal}
+            searchResults = {searchResults}
+            firstResult = {firstResult}
+            setFirstResult ={setFirstResult}
+          />
+          <BookListModal
+            setShowAddBookModal={setShowAddBookModal}
+            showBookListModal={showBookListModal}
+            setShowBookListModal={setShowBookListModal}
+            setShowBookSearchModal={setShowBookSearchModal}
+            searchResults = {searchResults}
+            setFirstResult ={setFirstResult}
+           
           />
           <Bookshelf
             userId={user.uid}
