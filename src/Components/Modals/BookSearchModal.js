@@ -1,4 +1,4 @@
-import { setDoc, addDoc, doc, serverTimestamp } from "@firebase/firestore";
+import { setDoc,  doc, serverTimestamp } from "@firebase/firestore";
 import { useFirestore } from "reactfire";
 
 const BookSearchModal = ({

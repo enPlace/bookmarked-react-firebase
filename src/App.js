@@ -1,11 +1,11 @@
 import { getFirestore } from "@firebase/firestore";
-import Bookshelf from "./Bookshelf";
-import AddBookModal from "./AddBookModal";
-import BookSearchModal from "./BookSearchModal";
-import BookListModal from "./BookListModal";
+import Bookshelf from "./Components/Bookshelf";
+import AddBookModal from "./Components/Modals/AddBookModal";
+import BookSearchModal from "./Components/Modals/BookSearchModal";
+import BookListModal from "./Components/Modals/BookListModal";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
-import "./Modals.css";
+import "./Components/Modals/Modals.css";
 import {
   getAuth,
   signOut,
@@ -45,8 +45,10 @@ const App = () => {
     );
   } else
     return (
+      
       <div>
         {console.log("useridteat", user.uid)}
+        
         <h1>Welcome Back, {user.displayName}!</h1>
         <button
           onClick={() => {

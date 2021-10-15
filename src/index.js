@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import Header from "./Components/Header";
 import App from "./App";
 import { FirebaseAppProvider, AuthProvider, useFirebaseApp } from "reactfire";
 import { getAuth } from "@firebase/auth";
@@ -24,6 +25,7 @@ const UserAuth = () =>{
 
 render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+   <Header></Header>
    <UserAuth></UserAuth>
   </FirebaseAppProvider>,
   document.getElementById("root")

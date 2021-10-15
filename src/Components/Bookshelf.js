@@ -1,6 +1,6 @@
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
 import { setDoc, doc, collection, query, orderBy } from "@firebase/firestore";
-import { defaultLibrary } from "./default";
+import { defaultLibrary } from "../default";
 import Book from "./Book";
 import "./Bookshelf.css";
 

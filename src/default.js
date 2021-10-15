@@ -1,5 +1,5 @@
-import { setDoc, doc, serverTimestamp } from "@firebase/firestore";
-import { useFirestore } from "reactfire";
+import { serverTimestamp } from "@firebase/firestore";
+
 
 export const defaultLibrary = [
   {
@@ -118,39 +118,3 @@ export const defaultLibrary = [
     read: false,
   },
 ];
-const AddTask = ({ userId }) => {
-  const firestore = useFirestore();
-
-  const populateDefault = async (book, userId) => {
-    const docData = book;
-    const docRef = await setDoc(
-      doc(firestore, userId, book.id),
-      docData
-    );
-
-    console.log(docRef);
-  };
-  defaultLibrary.forEach(book=>{
-      populateDefault(book)
-  })
-
-  return (
-    <form
-      action=""
-      onSubmit={(e) => {
-        e.preventDefault();
- 
-      }}
-    >
-      <input
-        type="text"
-        placeholder="add a new task..."
-        
-       
-      />
-      <button type="submit">+</button>
-    </form>
-  );
-};
-
-export default AddTask;
