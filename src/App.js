@@ -14,14 +14,17 @@ import {
 } from "@firebase/auth";
 
 const App = () => {
-  const [showAddBookModal, setShowAddBookModal] = useState(false);
-  const [showBookSearchModal, setShowBookSearchModal] = useState(false);
-  const [showBookListModal, setShowBookListModal] = useState(false);
-  const [searchResults, setSearchResults] = useState(false)
-  const [firstResult, setFirstResult] = useState(false)
+  //firestore hooks
   const firestoreInstance = getFirestore(useFirebaseApp());
   const auth = getAuth(useFirebaseApp());
   const { userStatus, data: user } = useUser();
+
+  //app hooks
+  const [showAddBookModal, setShowAddBookModal] = useState(false);
+  const [showBookSearchModal, setShowBookSearchModal] = useState(false);
+  const [showBookListModal, setShowBookListModal] = useState(false);
+  const [searchResults, setSearchResults] = useState(false);
+  const [firstResult, setFirstResult] = useState(false);
 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -57,26 +60,27 @@ const App = () => {
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
             setShowBookSearchModal={setShowBookSearchModal}
-            setSearchResults = {setSearchResults}
-            setFirstResult = { setFirstResult}
+            setSearchResults={setSearchResults}
+            setFirstResult={setFirstResult}
           />
           <BookSearchModal
+            userId={user.uid}
             showBookSearchModal={showBookSearchModal}
             setShowBookSearchModal={setShowBookSearchModal}
             setShowAddBookModal={setShowAddBookModal}
             setShowBookListModal={setShowBookListModal}
-            searchResults = {searchResults}
-            firstResult = {firstResult}
-            setFirstResult ={setFirstResult}
+            searchResults={searchResults}
+            firstResult={firstResult}
+            setFirstResult={setFirstResult}
+            setSearchResults={setSearchResults}
           />
           <BookListModal
             setShowAddBookModal={setShowAddBookModal}
             showBookListModal={showBookListModal}
             setShowBookListModal={setShowBookListModal}
             setShowBookSearchModal={setShowBookSearchModal}
-            searchResults = {searchResults}
-            setFirstResult ={setFirstResult}
-           
+            searchResults={searchResults}
+            setFirstResult={setFirstResult}
           />
           <Bookshelf
             userId={user.uid}

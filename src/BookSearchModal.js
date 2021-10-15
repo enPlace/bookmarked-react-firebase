@@ -1,17 +1,36 @@
-import { map } from "@firebase/util";
+import { setDoc, addDoc, doc, serverTimestamp } from "@firebase/firestore";
+import { useFirestore } from "reactfire";
 
 const BookSearchModal = ({
+  userId,
   searchResults,
   showBookSearchModal,
   setShowBookSearchModal,
-  setShowAddBookModal,
   setShowBookListModal,
-  firstResult, 
-
+  firstResult,
+  setSearchResults,
+  setFirstResult
 }) => {
-
-console.log("firstresults", firstResult)
-  return!searchResults ? null : (
+  const firestore = useFirestore();
+  const addBookToShelf = async () => {
+    const newBook = {
+      author: firstResult.authors,
+      dateAdded: serverTimestamp(),
+      id: firstResult.industryIdentifiers[0].identifier,
+      imgsrc: `${firstResult.imageLinks && firstResult.imageLinks.thumbnail}`,
+      identifier: `${
+        firstResult.industryIdentifiers &&
+        firstResult.industryIdentifiers[0].identifier
+      }`,
+      name: `${firstResult.title}`,
+      read: true,
+    };
+    try {
+      await setDoc(doc(firestore, userId, newBook.id), newBook);
+     
+    } catch {}
+  };
+  return !searchResults ? null : (
     <div
       className={`modal ${showBookSearchModal ? "active" : ""}`}
       id="book-search-modal"
@@ -27,7 +46,10 @@ console.log("firstresults", firstResult)
       </div>
 
       <div id="booksearch-img">
-        <img src={firstResult.imageLinks&&firstResult.imageLinks.thumbnail} alt="" />
+        <img
+          src={firstResult.imageLinks && firstResult.imageLinks.thumbnail}
+          alt=""
+        />
       </div>
       <div id="booksearch-title" className="info">
         {firstResult.title}
@@ -40,20 +62,21 @@ console.log("firstresults", firstResult)
             </div>
           );
         })}
-      {firstResult.industryIdentifiers && 
-         
-            <div id="booksearch-isbn" className="info">
-            Identifier: {firstResult.industryIdentifiers[0].identifier} ({firstResult.industryIdentifiers[0].type})
-          </div>
-          
-      }
+      {firstResult.industryIdentifiers && (
+        <div id="booksearch-isbn" className="info">
+          Identifier: {firstResult.industryIdentifiers[0].identifier} (
+          {firstResult.industryIdentifiers[0].type})
+        </div>
+      )}
       <form action="">
         <button
           id="confirm"
           onClick={(e) => {
             e.preventDefault();
-            setShowBookSearchModal(false);
-            setShowBookListModal(true);
+            addBookToShelf()
+            setSearchResults(false)
+            setFirstResult(false)
+            setShowBookSearchModal(false)
           }}
         >
           Yes
