@@ -1,23 +1,36 @@
+import { useEffect, useState } from "react";
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
 import { setDoc, doc, collection, query, orderBy } from "@firebase/firestore";
 import { defaultLibrary } from "../default";
 import Book from "./Book";
 import "./Bookshelf.css";
 
-const Bookshelf = ({ userId, setShowAddBookModal }) => {
+const Bookshelf = ({ userId, setShowAddBookModal, viewCategory, sortBy }) => {
   //check to see if there is a collection with the user's id
   // if it doesn't,
 
   const firestore = useFirestore();
   const userBooks = collection(firestore, userId);
-  const booksQuery = query(userBooks, orderBy("dateAdded", "desc"));
-  const { status, data: booksData } = useFirestoreCollectionData(booksQuery, {
+  const [booksQuery, setBooksQuery] = useState(
+    query(userBooks, orderBy("dateAdded", "desc"))
+  );
+  let { status, data: booksData } = useFirestoreCollectionData(booksQuery, {
     idField: "id",
   });
   const populateDefault = async (book, userId) => {
     const docData = book;
     await setDoc(doc(firestore, userId, book.id), docData);
   };
+  useEffect(() => {
+    const newQuery = query(
+      userBooks,
+      orderBy(
+        sortBy === "newest" || sortBy === "oldest" ? "dateAdded" : "name",
+        sortBy === "a-z" || sortBy === "oldest" ? "asc" : "desc"
+      )
+    );
+    setBooksQuery(newQuery);
+  }, [sortBy, userBooks]);
   if (status === "loading") {
     return <h1>Loading...</h1>;
   } else if (booksData[0] === undefined) {

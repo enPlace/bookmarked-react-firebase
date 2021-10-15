@@ -1,4 +1,5 @@
 import { getFirestore } from "@firebase/firestore";
+import Filter from "./Components/Filter";
 import Bookshelf from "./Components/Bookshelf";
 import AddBookModal from "./Components/Modals/AddBookModal";
 import BookSearchModal from "./Components/Modals/BookSearchModal";
@@ -19,13 +20,14 @@ const App = () => {
   const auth = getAuth(useFirebaseApp());
   const { userStatus, data: user } = useUser();
 
-  //app hooks
+  //app states
   const [showAddBookModal, setShowAddBookModal] = useState(false);
   const [showBookSearchModal, setShowBookSearchModal] = useState(false);
   const [showBookListModal, setShowBookListModal] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
   const [firstResult, setFirstResult] = useState(false);
-
+  const [sortBy, setSortBy] = useState("newest");
+  const [viewCategory, setViewCategory] = useState("all");
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -45,10 +47,9 @@ const App = () => {
     );
   } else
     return (
-      
       <div>
         {console.log("useridteat", user.uid)}
-        
+
         <h1>Welcome Back, {user.displayName}!</h1>
         <button
           onClick={() => {
@@ -58,6 +59,12 @@ const App = () => {
           sign out
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
+          <Filter
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            viewCategory={viewCategory}
+            setViewCategory={setViewCategory}
+          ></Filter>
           <AddBookModal
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
@@ -88,6 +95,8 @@ const App = () => {
             userId={user.uid}
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
+            viewCategory = {viewCategory}
+            sortBy = {sortBy}
           ></Bookshelf>
         </FirestoreProvider>
       </div>
