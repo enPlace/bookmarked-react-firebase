@@ -1,16 +1,16 @@
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
-import { setDoc,  doc, collection, query } from "@firebase/firestore";
+import { setDoc, doc, collection, query, orderBy } from "@firebase/firestore";
 import { defaultLibrary } from "./default";
 import Book from "./Book";
-import "./Bookshelf.css"
+import "./Bookshelf.css";
 
 const Bookshelf = ({ userId, setShowAddBookModal }) => {
   //check to see if there is a collection with the user's id
   // if it doesn't,
-  
+
   const firestore = useFirestore();
   const userBooks = collection(firestore, userId);
-  const booksQuery = query(userBooks);
+  const booksQuery = query(userBooks, orderBy("dateAdded", "desc"));
   const { status, data: booksData } = useFirestoreCollectionData(booksQuery, {
     idField: "id",
   });
@@ -31,14 +31,18 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
     );
   } else
     return (
-      
       <div className="Bookshelf">
-        <div className="Book add-card"onClick = {()=>{setShowAddBookModal(true)}}>
-            <div className = "plus" >+</div>
+        <div
+          className="Book add-card"
+          onClick={() => {
+            setShowAddBookModal(true);
+          }}
+        >
+          <div className="plus">+</div>
         </div>
         {console.log(booksData)}
-        {booksData.map(book=>{
-            return <Book userId = {userId} book = {book}></Book>
+        {booksData.map((book) => {
+          return <Book userId={userId} book={book}></Book>;
         })}
       </div>
     );

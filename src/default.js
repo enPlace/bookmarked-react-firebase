@@ -1,10 +1,10 @@
-import { setDoc, doc } from "@firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "@firebase/firestore";
 import { useFirestore } from "reactfire";
 
 export const defaultLibrary = [
   {
     author: "Robert C. Martin",
-    dateAdded: "2021-06-28T22:51:35.100Z",
+    dateAdded: serverTimestamp(),
     id: "book00",
     imgsrc:
       "http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
@@ -20,11 +20,11 @@ export const defaultLibrary = [
     isbn: "0520081145",
     imgsrc:
       "http://books.google.com/books/content?id=rPgVp3vMOjcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-    dateAdded: "2021-06-28T22:36:20.466Z",
+    dateAdded: serverTimestamp(),
   },
   {
     author: "Ray Bradbury",
-    dateAdded: "2021-06-28T22:30:37.164Z",
+    dateAdded: serverTimestamp(),
     id: "book02",
     imgsrc:
       "http://books.google.com/books/content?id=1XUzAAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
@@ -34,7 +34,7 @@ export const defaultLibrary = [
   },
   {
     author: "Eduardo H. Galeano",
-    dateAdded: "2021-06-27T17:31:32.029Z",
+    dateAdded: serverTimestamp(),
     id: "book03",
     imgsrc:
       "http://books.google.com/books/content?id=CWYiDgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
@@ -49,7 +49,7 @@ export const defaultLibrary = [
     read: true,
     isbn: "1400076323",
     imgsrc: "http://books.google.com/books/content?id=EAsQAQAAIAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    dateAdded: new Date(),
+    dateAdded: serverTimestamp(),
   },
   {
     id: "book05",
@@ -58,7 +58,7 @@ export const defaultLibrary = [
     read: true,
     isbn: "9780226893969",
     imgsrc: "http://books.google.com/books/content?id=3TFYOUCBGsUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-    dateAdded: new Date(),
+    dateAdded: serverTimestamp(),
   },
   {
     id: "book06",
@@ -67,7 +67,7 @@ export const defaultLibrary = [
     read: true,
     isbn: "8426405738",
     imgsrc: 	"http://books.google.com/books/content?id=oc5iAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    dateAdded: new Date(),
+    dateAdded: serverTimestamp(),
   },
 
   {
@@ -77,7 +77,7 @@ export const defaultLibrary = [
     read: false,
     isbn: "9781524743017",
     imgsrc: "http://books.google.com/books/content?id=f16IDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-    dateAdded: new Date(),
+    dateAdded: serverTimestamp(),
   },
   {
     id: "book08",
@@ -86,7 +86,7 @@ export const defaultLibrary = [
     read: true,
     isbn: "0465026567",
     imgsrc: "http://books.google.com/books/content?id=63yk44Sc59EC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    dateAdded: new Date(),
+    dateAdded:serverTimestamp(),
   },
   {
     id: "book09",
@@ -95,11 +95,11 @@ export const defaultLibrary = [
     read: false,
     isbn: " 0984782869",
     imgsrc: "http://books.google.com/books/content?id=jD8iswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-    dateAdded: new Date(),
+    dateAdded: serverTimestamp(),
   },
   {
     author: "James Monaco",
-    dateAdded: "2021-06-26T15:42:06.106Z",
+    dateAdded: serverTimestamp(),
     id: "book10",
     imgsrc:
       "http://books.google.com/books/content?id=NCDuAAAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
@@ -109,7 +109,7 @@ export const defaultLibrary = [
   },
   {
     author: "Bruce Chatwin",
-    dateAdded: "2021-06-28T22:51:13.906Z",
+    dateAdded: serverTimestamp(),
     id: "book11",
     imgsrc:
       "http://books.google.com/books/content?id=S45xoAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
