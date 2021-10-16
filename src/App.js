@@ -3,10 +3,11 @@ import Bookshelf from "./Components/Bookshelf";
 import BookSearchModal from "./Components/Modals/BookSearchModal";
 import ConfirmBookModal from "./Components/Modals/ConfirmBookModal";
 import BookListModal from "./Components/Modals/BookListModal";
+import Overlay from "./Components/Modals/Overlay";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
 import "./Components/Modals/Modals.css";
-import "./App.css"
+import "./App.css";
 import {
   getAuth,
   signOut,
@@ -21,12 +22,12 @@ const App = () => {
   const { userStatus, data: user } = useUser();
 
   //app states
-  const [showHideModal, setShowHideModal] = useState(false)
+  const [showHideModal, setShowHideModal] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
   const [firstResult, setFirstResult] = useState(false);
 
-  const[searchReadStatus, setSearchReadStatus] = useState(false)
- 
+  const [searchReadStatus, setSearchReadStatus] = useState(false);
+
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -45,7 +46,7 @@ const App = () => {
   } else
     return (
       <div>
-      {/*   <h1>Welcome Back, {user.displayName}!</h1> */}
+        {/*   <h1>Welcome Back, {user.displayName}!</h1> */}
         <button
           onClick={() => {
             signOut(auth);
@@ -54,34 +55,38 @@ const App = () => {
           sign out
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
+          <Overlay
+            showHideModal={showHideModal}
+            setShowHideModal={setShowHideModal}
+          />
           <BookSearchModal
-            showHideModal = {showHideModal}
-            setShowHideModal = {setShowHideModal}
+            showHideModal={showHideModal}
+            setShowHideModal={setShowHideModal}
             setSearchResults={setSearchResults}
             setFirstResult={setFirstResult}
-            searchReadStatus={searchReadStatus} 
-            setSearchReadStatus ={setSearchReadStatus}
+            searchReadStatus={searchReadStatus}
+            setSearchReadStatus={setSearchReadStatus}
           />
           <ConfirmBookModal
             userId={user.uid}
-            showHideModal = {showHideModal}
-            setShowHideModal = {setShowHideModal}
+            showHideModal={showHideModal}
+            setShowHideModal={setShowHideModal}
             searchResults={searchResults}
             firstResult={firstResult}
             setFirstResult={setFirstResult}
             setSearchResults={setSearchResults}
-            searchReadStatus = {searchReadStatus}
+            searchReadStatus={searchReadStatus}
           />
           <BookListModal
-           showHideModal = {showHideModal}
-           setShowHideModal = {setShowHideModal}
+            showHideModal={showHideModal}
+            setShowHideModal={setShowHideModal}
             searchResults={searchResults}
             setFirstResult={setFirstResult}
           />
           <Bookshelf
             userId={user.uid}
-            showHideModal = {showHideModal}
-            setShowHideModal = {setShowHideModal}
+            showHideModal={showHideModal}
+            setShowHideModal={setShowHideModal}
           ></Bookshelf>
         </FirestoreProvider>
       </div>
