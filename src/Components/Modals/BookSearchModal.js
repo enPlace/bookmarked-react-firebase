@@ -1,100 +1,117 @@
-import { setDoc,  doc, serverTimestamp } from "@firebase/firestore";
-import { useFirestore } from "reactfire";
+import { useState } from "react";
 
-const BookSearchModal = ({
-  userId,
-  searchResults,
-  showBookSearchModal,
+const AddBookModal = ({
+  showAddBookModal,
+  setShowAddBookModal,
   setShowBookSearchModal,
-  setShowBookListModal,
-  firstResult,
   setSearchResults,
   setFirstResult,
-  searchReadStatus
+  searchReadStatus,
+  setSearchReadStatus,
 }) => {
-  const firestore = useFirestore();
-  const addBookToShelf = async () => {
-    const newBook = {
-      author: firstResult.authors,
-      dateAdded: serverTimestamp(),
-      id: firstResult.industryIdentifiers[0].identifier,
-      imgsrc: `${firstResult.imageLinks && firstResult.imageLinks.thumbnail}`,
-      identifier: `${
-        firstResult.industryIdentifiers &&
-        firstResult.industryIdentifiers[0].identifier
-      }`,
-      name: `${firstResult.title}`,
-      read: searchReadStatus,
-    };
-    try {
-      await setDoc(doc(firestore, userId, newBook.id), newBook);
-     
-    } catch {console.error();}
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [isbn, setIsbn] = useState("");
+
+  const bookSearch = async function (searchText) {
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${searchText}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw Error(response.status);
+    }
+    const data = await response.json();
+
+    setFirstResult(data.items[0]);
+    setSearchResults(data);
+    setShowAddBookModal(false);
+
+    /* setFirstResult(data.items[0]) */
+    setShowBookSearchModal(true);
+    return data;
   };
-  return !searchResults ? null : (
+  return (
     <div
-      className={`modal ${showBookSearchModal ? "active" : ""}`}
-      id="book-search-modal"
+      className={`modal ${showAddBookModal ? "active" : ""}`}
+      id="add-book-modal"
     >
       <div className="modal-header">
-        <h1>Is this the book you're looking for? </h1>
+        <h1>Add a new book </h1>
         <button
           className="close-button"
-          onClick={() => setShowBookSearchModal(false)}
+          onClick={() => {
+            setTitle("");
+            setIsbn("");
+            setAuthor("");
+            setShowAddBookModal(false);
+          }}
         >
           &times;
         </button>
       </div>
 
-      <div id="booksearch-img">
-        <img
-          src={firstResult.imageLinks && firstResult.imageLinks.thumbnail}
-          alt=""
-        />
+      <div className="modal-content">
+        <form id="new-book" autoComplete="off">
+          <label htmlFor="title" className="title inf">
+            Title
+          </label>
+          <input
+            type="text"
+            className="inf"
+            name="title"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <label htmlFor="author" className="author inf">
+            Author (optional)
+          </label>
+          <input
+            type="text"
+            name="author"
+            className="inf"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+          />
+          <label htmlFor="isbn" className="isbn inf">
+            ISBN (optional)
+          </label>
+          <input
+            type="text"
+            name="isbn"
+            className="inf"
+            value={isbn}
+            onChange={(e) => setIsbn(e.target.value)}
+          />
+          <div id="form-checkbox">
+            <input
+              type="checkbox"
+              name="cbox1"
+              id="cbox1"
+              className="inf"
+              checked={searchReadStatus ? "checked" : ""}
+              onChange = {(e)=>{
+                setSearchReadStatus(!searchReadStatus)
+              }}
+            />
+            <label> I've already read this book</label>
+          </div>
+          <div className="add-button">
+            <button
+              type="submit"
+              id="add-book-button"
+              value="on/off"
+              onClick={(e) => {
+                e.preventDefault();
+                bookSearch(`${title} ${author} ${isbn}`);
+              }}
+            >
+              Get book
+            </button>
+          </div>
+        </form>
       </div>
-      <div id="booksearch-title" className="info">
-        {firstResult.title}
-      </div>
-      {firstResult.authors &&
-        firstResult.authors.map((author) => {
-          return (
-            <div id="booksearch-author" className="info">
-              {author}
-            </div>
-          );
-        })}
-      {firstResult.industryIdentifiers && (
-        <div id="booksearch-isbn" className="info">
-          Identifier: {firstResult.industryIdentifiers[0].identifier} (
-          {firstResult.industryIdentifiers[0].type})
-        </div>
-      )}
-      <form action="">
-        <button
-          id="confirm"
-          onClick={(e) => {
-            e.preventDefault();
-            addBookToShelf()
-            setSearchResults(false)
-            setFirstResult(false)
-            setShowBookSearchModal(false)
-          }}
-        >
-          Yes
-        </button>{" "}
-        <button
-          id="show-all-results-button"
-          onClick={(e) => {
-            e.preventDefault();
-            setShowBookSearchModal(false);
-            setShowBookListModal(true);
-          }}
-        >
-          No
-        </button>
-      </form>
     </div>
   );
 };
 
-export default BookSearchModal;
+export default AddBookModal;

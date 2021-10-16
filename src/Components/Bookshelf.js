@@ -8,7 +8,7 @@ import "./Bookshelf.css";
 
 const Bookshelf = ({ userId, setShowAddBookModal }) => {
   const firestore = useFirestore();
-  const userBooks = collection(firestore, userId);
+  const [userBooks, setUserBooks] = useState(collection(firestore, userId));
   const [booksQuery, setBooksQuery] = useState(
     query(userBooks, orderBy("dateAdded", "desc"))
   );
@@ -23,6 +23,7 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
     const docData = book;
     await setDoc(doc(firestore, userId, book.id), docData);
   };
+
   useEffect(() => {
     const newQuery = query(
       userBooks,
@@ -32,6 +33,7 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
       )
     );
     setBooksQuery(newQuery);
+    setUserBooks(collection(firestore, userId));
   }, [sortBy]);
 
   if (status === "loading") {
@@ -69,7 +71,7 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
           {booksData.map((book) => {
             return (
               <Book
-                searchFilter ={searchFilter}
+                searchFilter={searchFilter}
                 hasReadFilter={hasReadFilter}
                 userId={userId}
                 book={book}

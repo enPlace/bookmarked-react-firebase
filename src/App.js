@@ -1,7 +1,7 @@
 import { getFirestore } from "@firebase/firestore";
 import Bookshelf from "./Components/Bookshelf";
-import AddBookModal from "./Components/Modals/AddBookModal";
 import BookSearchModal from "./Components/Modals/BookSearchModal";
+import ConfirmBookModal from "./Components/Modals/ConfirmBookModal";
 import BookListModal from "./Components/Modals/BookListModal";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
@@ -56,7 +56,7 @@ const App = () => {
           sign out
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
-          <AddBookModal
+          <BookSearchModal
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
             setShowBookSearchModal={setShowBookSearchModal}
@@ -65,7 +65,7 @@ const App = () => {
             searchReadStatus={searchReadStatus} 
             setSearchReadStatus ={setSearchReadStatus}
           />
-          <BookSearchModal
+          <ConfirmBookModal
             userId={user.uid}
             showBookSearchModal={showBookSearchModal}
             setShowBookSearchModal={setShowBookSearchModal}

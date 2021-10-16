@@ -11,7 +11,7 @@ const ListItemContainer = ({
       className="list-item-container"
       data-target="0"
       onClick={() => {
-        setFirstResult(volumeInfo);
+        setFirstResult(result);
         setShowBookListModal(false);
         setShowBookSearchModal(true);
       }}
