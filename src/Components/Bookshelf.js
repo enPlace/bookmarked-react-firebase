@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
 import { useFirestore, useFirestoreCollectionData } from "reactfire";
-import { setDoc, doc, collection, query, orderBy } from "@firebase/firestore";
+import {
+  setDoc,
+  doc,
+  deleteDoc,
+  collection,
+  query,
+  orderBy,
+} from "@firebase/firestore";
 import { defaultLibrary } from "../default";
 import Book from "./Book";
+import ConfirmDeleteModal from "./Modals/ConfirmDeleteModal";
 import Filter from "./Filter";
 import "./Bookshelf.css";
 
-const Bookshelf = ({ userId, setShowHideModal }) => {
+const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
   const firestore = useFirestore();
   const [userBooks, setUserBooks] = useState(collection(firestore, userId));
   const [booksQuery, setBooksQuery] = useState(
@@ -18,6 +26,11 @@ const Bookshelf = ({ userId, setShowHideModal }) => {
   const [sortBy, setSortBy] = useState("newest");
   const [hasReadFilter, setHasReadFilter] = useState("all");
   const [searchFilter, setSearchFilter] = useState("");
+  const [toDelete, setToDelete] = useState(false);
+
+  const handleDelete = async () => {
+    await deleteDoc(doc(firestore, userId, toDelete));
+  };
 
   const populateDefault = async (book, userId) => {
     const docData = book;
@@ -33,7 +46,7 @@ const Bookshelf = ({ userId, setShowHideModal }) => {
       )
     );
     setBooksQuery(newQuery);
-    setUserBooks(collection(firestore, userId))
+    setUserBooks(collection(firestore, userId));
   }, [sortBy]);
 
   if (status === "loading") {
@@ -50,6 +63,12 @@ const Bookshelf = ({ userId, setShowHideModal }) => {
   } else
     return (
       <div className="container">
+        <ConfirmDeleteModal
+          showHideModal={showHideModal}
+          setShowHideModal={setShowHideModal}
+          handleDelete = {handleDelete}
+          setToDelete={setToDelete}
+        />
         <Filter
           sortBy={sortBy}
           setSortBy={setSortBy}
@@ -71,10 +90,12 @@ const Bookshelf = ({ userId, setShowHideModal }) => {
           {booksData.map((book) => {
             return (
               <Book
-                searchFilter ={searchFilter}
+                searchFilter={searchFilter}
                 hasReadFilter={hasReadFilter}
                 userId={userId}
                 book={book}
+                setShowHideModal={setShowHideModal}
+                setToDelete={setToDelete}
               ></Book>
             );
           })}

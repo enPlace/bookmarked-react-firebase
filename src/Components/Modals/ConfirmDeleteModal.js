@@ -1,11 +1,20 @@
-const ConfirmDeleteModal = ({setShowHideModal}) => {
-  return (
-    <div className="modal" id="delete-modal">
+const ConfirmDeleteModal = ({
+  showHideModal,
+  setShowHideModal,
+  handleDelete,
+  setToDelete
+}) => {
+  return showHideModal !== "confirm-delete" ? null : (
+    <div className="modal active" id="delete-modal">
       <div className="modal-header">
         <h1> </h1>
-        <button className="close-button" onClick = {()=>{
-            setShowHideModal(false)
-        }}>
+        <button
+          className="close-button"
+          onClick={() => {
+            setShowHideModal(false);
+            setToDelete(false)
+          }}
+        >
           &times;
         </button>
       </div>
@@ -16,8 +25,14 @@ const ConfirmDeleteModal = ({setShowHideModal}) => {
         <p>This action cannot be undone</p>
 
         <form action="">
-          <button id="confirm-delete">Delete</button>
-          <button id="cancel-delete">Go back</button>
+          <button id="confirm-delete" onClick = {()=>{
+              handleDelete()
+              setShowHideModal(false)
+          }}>Delete</button>
+          <button id="cancel-delete" onClick = {()=>{
+              setToDelete(false)
+              setShowHideModal(false)
+          }}>Go back</button>
         </form>
       </div>
     </div>
