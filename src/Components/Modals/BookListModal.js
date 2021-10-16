@@ -1,24 +1,22 @@
 import ListItemContainer from "./ListItemContainer";
 
 const BookListModal = ({
-  showBookListModal,
-  setShowBookListModal,
-  setShowAddBookModal,
-  setShowBookSearchModal,
+  showHideModal,
+  setShowHideModal,
   searchResults,
   setFirstResult,
 }) => {
   console.log("searchtest", !searchResults);
   return !searchResults ? null : (
     <div
-      className={`modal ${showBookListModal ? "active" : ""}`}
+      className={`modal ${showHideModal === "book-list" ? "active" : ""}`}
       id="book-list-modal"
     >
       <div className="modal-header">
         <h1>Here are some other books that may match your search:</h1>
         <button
           className="close-button"
-          onClick={() => setShowBookListModal(false)}
+          onClick={() => setShowHideModal(false)}
         >
           &times;
         </button>
@@ -30,8 +28,8 @@ const BookListModal = ({
             return (
               <ListItemContainer
                 result={result}
-                setShowBookListModal={setShowBookListModal}
-                setShowBookSearchModal = {setShowBookSearchModal}
+                showHideModal={showHideModal}
+                setShowHideModal={setShowHideModal}
                 setFirstResult={setFirstResult}
               />
             );
@@ -42,8 +40,7 @@ const BookListModal = ({
           id="search-again"
           onClick={(e) => {
             e.preventDefault();
-            setShowAddBookModal(true);
-            setShowBookListModal(false);
+            setShowHideModal("book-search")
           }}
         >
           Back to search menu

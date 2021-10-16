@@ -1,25 +1,21 @@
 const ListItemContainer = ({
   result,
   setFirstResult,
-  setShowBookListModal,
-  setShowBookSearchModal,
+  setShowHideModal,
 }) => {
   const volumeInfo = result.volumeInfo;
-  /* console.log("thisis volumeninfo", volumeInfo.imageLinks[0]) */
   return (
     <div
       className="list-item-container"
-      data-target="0"
       onClick={() => {
         setFirstResult(result);
-        setShowBookListModal(false);
-        setShowBookSearchModal(true);
+        setShowHideModal("confirm-book");
       }}
     >
-      <div className="list-item-title" data-target="0">
+      <div className="list-item-title">
         {volumeInfo.title}
       </div>
-      <div className="list-item-author" data-target="0">
+      <div className="list-item-author">
         {volumeInfo.authors &&
           volumeInfo.authors.map((author) => {
             return `${author} `;
@@ -27,7 +23,6 @@ const ListItemContainer = ({
       </div>
       <div className="list-item-thumb">
         <img
-          data-target="0"
           src={
             volumeInfo.imageLinks ? volumeInfo.imageLinks.smallThumbnail : ""
           }

@@ -21,9 +21,7 @@ const App = () => {
   const { userStatus, data: user } = useUser();
 
   //app states
-  const [showAddBookModal, setShowAddBookModal] = useState(false);
-  const [showBookSearchModal, setShowBookSearchModal] = useState(false);
-  const [showBookListModal, setShowBookListModal] = useState(false);
+  const [showHideModal, setShowHideModal] = useState(false)
   const [searchResults, setSearchResults] = useState(false);
   const [firstResult, setFirstResult] = useState(false);
 
@@ -57,9 +55,8 @@ const App = () => {
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
           <BookSearchModal
-            showAddBookModal={showAddBookModal}
-            setShowAddBookModal={setShowAddBookModal}
-            setShowBookSearchModal={setShowBookSearchModal}
+            showHideModal = {showHideModal}
+            setShowHideModal = {setShowHideModal}
             setSearchResults={setSearchResults}
             setFirstResult={setFirstResult}
             searchReadStatus={searchReadStatus} 
@@ -67,10 +64,8 @@ const App = () => {
           />
           <ConfirmBookModal
             userId={user.uid}
-            showBookSearchModal={showBookSearchModal}
-            setShowBookSearchModal={setShowBookSearchModal}
-            setShowAddBookModal={setShowAddBookModal}
-            setShowBookListModal={setShowBookListModal}
+            showHideModal = {showHideModal}
+            setShowHideModal = {setShowHideModal}
             searchResults={searchResults}
             firstResult={firstResult}
             setFirstResult={setFirstResult}
@@ -78,17 +73,15 @@ const App = () => {
             searchReadStatus = {searchReadStatus}
           />
           <BookListModal
-            setShowAddBookModal={setShowAddBookModal}
-            showBookListModal={showBookListModal}
-            setShowBookListModal={setShowBookListModal}
-            setShowBookSearchModal={setShowBookSearchModal}
+           showHideModal = {showHideModal}
+           setShowHideModal = {setShowHideModal}
             searchResults={searchResults}
             setFirstResult={setFirstResult}
           />
           <Bookshelf
             userId={user.uid}
-            showAddBookModal={showAddBookModal}
-            setShowAddBookModal={setShowAddBookModal}
+            showHideModal = {showHideModal}
+            setShowHideModal = {setShowHideModal}
           ></Bookshelf>
         </FirestoreProvider>
       </div>

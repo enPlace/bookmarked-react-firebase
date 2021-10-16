@@ -1,13 +1,11 @@
 import { setDoc,  doc, serverTimestamp } from "@firebase/firestore";
 import { useFirestore } from "reactfire";
-import Book from "../Book";
 
 const BookSearchModal = ({
   userId,
   searchResults,
-  showBookSearchModal,
-  setShowBookSearchModal,
-  setShowBookListModal,
+  showHideModal,
+  setShowHideModal,
   firstResult,
   setSearchResults,
   setFirstResult,
@@ -35,14 +33,14 @@ const BookSearchModal = ({
   };
   return !searchResults ? null : (
     <div
-      className={`modal ${showBookSearchModal ? "active" : ""}`}
+      className={`modal ${showHideModal ==="confirm-book" ? "active" : ""}`}
       id="book-search-modal"
     >
       <div className="modal-header">
         <h1>Is this the book you're looking for? </h1>
         <button
           className="close-button"
-          onClick={() => setShowBookSearchModal(false)}
+          onClick={() => setShowHideModal(false)}
         >
           &times;
         </button>
@@ -79,7 +77,7 @@ const BookSearchModal = ({
             addBookToShelf()
             setSearchResults(false)
             setFirstResult(false)
-            setShowBookSearchModal(false)
+            setShowHideModal(false)
           }}
         >
           Yes
@@ -88,8 +86,7 @@ const BookSearchModal = ({
           id="show-all-results-button"
           onClick={(e) => {
             e.preventDefault();
-            setShowBookSearchModal(false);
-            setShowBookListModal(true);
+            setShowHideModal("book-list");
           }}
         >
           No

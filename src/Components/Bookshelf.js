@@ -6,7 +6,7 @@ import Book from "./Book";
 import Filter from "./Filter";
 import "./Bookshelf.css";
 
-const Bookshelf = ({ userId, setShowAddBookModal }) => {
+const Bookshelf = ({ userId, setShowHideModal }) => {
   const firestore = useFirestore();
   const [userBooks, setUserBooks] = useState(collection(firestore, userId));
   const [booksQuery, setBooksQuery] = useState(
@@ -33,7 +33,7 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
       )
     );
     setBooksQuery(newQuery);
-    setUserBooks(collection(firestore, userId));
+    setUserBooks(collection(firestore, userId))
   }, [sortBy]);
 
   if (status === "loading") {
@@ -62,7 +62,7 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
           <div
             className="Book add-card"
             onClick={() => {
-              setShowAddBookModal(true);
+              setShowHideModal("book-search");
             }}
           >
             <div className="plus">+</div>
@@ -71,7 +71,7 @@ const Bookshelf = ({ userId, setShowAddBookModal }) => {
           {booksData.map((book) => {
             return (
               <Book
-                searchFilter={searchFilter}
+                searchFilter ={searchFilter}
                 hasReadFilter={hasReadFilter}
                 userId={userId}
                 book={book}

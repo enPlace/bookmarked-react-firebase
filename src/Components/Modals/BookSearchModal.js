@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 const AddBookModal = ({
-  showAddBookModal,
-  setShowAddBookModal,
-  setShowBookSearchModal,
+  showHideModal,
+  setShowHideModal,
   setSearchResults,
   setFirstResult,
   searchReadStatus,
@@ -23,15 +22,12 @@ const AddBookModal = ({
 
     setFirstResult(data.items[0]);
     setSearchResults(data);
-    setShowAddBookModal(false);
-
-    /* setFirstResult(data.items[0]) */
-    setShowBookSearchModal(true);
+    setShowHideModal("confirm-book");
     return data;
   };
   return (
     <div
-      className={`modal ${showAddBookModal ? "active" : ""}`}
+      className={`modal ${showHideModal==="book-search" ? "active" : ""}`}
       id="add-book-modal"
     >
       <div className="modal-header">
@@ -42,7 +38,7 @@ const AddBookModal = ({
             setTitle("");
             setIsbn("");
             setAuthor("");
-            setShowAddBookModal(false);
+            setShowHideModal(false);
           }}
         >
           &times;
@@ -89,8 +85,8 @@ const AddBookModal = ({
               id="cbox1"
               className="inf"
               checked={searchReadStatus ? "checked" : ""}
-              onChange = {(e)=>{
-                setSearchReadStatus(!searchReadStatus)
+              onChange={(e) => {
+                setSearchReadStatus(!searchReadStatus);
               }}
             />
             <label> I've already read this book</label>
