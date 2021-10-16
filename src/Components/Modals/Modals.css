@@ -8,14 +8,13 @@
   border-radius: 20px;
   z-index: 20;
 
-  background-color: rgb(216, 216, 216);
+  background-color: rgb(59, 59, 59);
   /* background-image: linear-gradient(to top, rgba(85, 85, 85, 0.842),rgb(150, 149, 153)); */
 
   width: 500px;
   max-width: 80%;
   padding: 40px;
 
-  color: rgb(0, 0, 0);
 }
 
 .modal.active {
@@ -36,12 +35,16 @@ button {
   width: 50px;
   height: 30px;
 }
+.close-button{
+  color: white;
+  font-size: 30px !important;
+}
 .modal-header {
   display: flex;
   padding: 10px 15px;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 6px solid rgb(58, 58, 58);
+  border-bottom: 6px solid rgb(121, 121, 121);
 }
 .modal-header button {
   border: none;
@@ -64,6 +67,13 @@ button {
   width: 300px;
   height: 450px;
 }
+#add-book-modal form{
+  margin-top: 20px;
+}
+#add-book-modal form input{
+  margin-bottom: 20px;
+}
+
 #add-book-modal input {
   width: 300px;
   height: 25px;
@@ -120,10 +130,10 @@ button {
 }
 #book-results-container{
   overflow-y: scroll;
-  background-color: rgb(148, 148, 148);
+  background-color: rgb(78, 78, 78);
   border-radius: 5px;
   height:700px;
-  background-image: linear-gradient(to bottom, rgba(184, 182, 182, 0.842),rgb(204, 203, 206)); 
+/*   background-image: linear-gradient(to bottom, rgba(36, 36, 36, 0.842),rgb(204, 203, 206));  */
 }
 .list-item-container{
   display: flex;
@@ -137,7 +147,7 @@ button {
 }
 .list-item-container:hover{
   cursor: pointer;
-  background-color: rgb(170, 203, 238)
+  background-color: rgb(35, 65, 97)
   
 
 }

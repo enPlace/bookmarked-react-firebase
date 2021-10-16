@@ -1,5 +1,4 @@
 import { getFirestore } from "@firebase/firestore";
-import Filter from "./Components/Filter";
 import Bookshelf from "./Components/Bookshelf";
 import AddBookModal from "./Components/Modals/AddBookModal";
 import BookSearchModal from "./Components/Modals/BookSearchModal";
@@ -7,6 +6,7 @@ import BookListModal from "./Components/Modals/BookListModal";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
 import "./Components/Modals/Modals.css";
+import "./App.css"
 import {
   getAuth,
   signOut,
@@ -47,7 +47,7 @@ const App = () => {
   } else
     return (
       <div>
-        <h1>Welcome Back, {user.displayName}!</h1>
+      {/*   <h1>Welcome Back, {user.displayName}!</h1> */}
         <button
           onClick={() => {
             signOut(auth);
