@@ -1,5 +1,11 @@
 import "./Filter.css";
-const Filter = ({ setSortBy, hasReadFilter, setHasReadFilter }) => {
+const Filter = ({
+  setSortBy,
+  hasReadFilter,
+  setHasReadFilter,
+  searchFilter,
+  setSearchFilter,
+}) => {
   return (
     <div id="form-container" class="search-bar">
       <form autocomplete="off" action="">
@@ -7,6 +13,10 @@ const Filter = ({ setSortBy, hasReadFilter, setHasReadFilter }) => {
           id="search-bar"
           type="text"
           placeholder="Filter books by title or author..."
+          value={searchFilter}
+          onChange={(e) => {
+            setSearchFilter(e.target.value);
+          }}
         />
       </form>
       <form id="sort-form" action="">

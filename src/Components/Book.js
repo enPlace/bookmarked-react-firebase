@@ -1,7 +1,7 @@
 import { setDoc } from "@firebase/firestore";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useFirestore } from "reactfire";
-const Book = ({ book, userId, hasReadFilter }) => {
+const Book = ({ book, userId, hasReadFilter, searchFilter }) => {
   const firestore = useFirestore();
   const handleDelete = async (id) => {
     await deleteDoc(doc(firestore, userId, id));
@@ -13,7 +13,15 @@ const Book = ({ book, userId, hasReadFilter }) => {
       { merge: true }
     );
   };
-  return hasReadFilter === "all" || hasReadFilter === book.read ? (
+
+  const checkFilter = (book) => {
+    const regex = new RegExp(searchFilter, "i");
+    const typeFilterCheck =  book.name.match(regex) || book.author[0].match(regex);
+    const hasReadCheck = hasReadFilter === "all" || hasReadFilter === book.read 
+    return typeFilterCheck && hasReadCheck
+  };
+
+  return checkFilter(book) ? (
     <div className="Book">
       <img src={book.imgsrc} className="avatar" alt=""></img>
       <div className="card-content">

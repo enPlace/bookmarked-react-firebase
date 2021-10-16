@@ -6,11 +6,7 @@ import Book from "./Book";
 import Filter from "./Filter";
 import "./Bookshelf.css";
 
-const Bookshelf = ({
-  userId,
-  setShowAddBookModal,
-
-}) => {
+const Bookshelf = ({ userId, setShowAddBookModal }) => {
   const firestore = useFirestore();
   const userBooks = collection(firestore, userId);
   const [booksQuery, setBooksQuery] = useState(
@@ -20,8 +16,9 @@ const Bookshelf = ({
     idField: "id",
   });
   const [sortBy, setSortBy] = useState("newest");
-  const [hasReadFilter, setHasReadFilter] = useState("all")
- 
+  const [hasReadFilter, setHasReadFilter] = useState("all");
+  const [searchFilter, setSearchFilter] = useState("");
+
   const populateDefault = async (book, userId) => {
     const docData = book;
     await setDoc(doc(firestore, userId, book.id), docData);
@@ -54,8 +51,10 @@ const Bookshelf = ({
         <Filter
           sortBy={sortBy}
           setSortBy={setSortBy}
-          hasReadFilter = {hasReadFilter}
-          setHasReadFilter = {setHasReadFilter}
+          hasReadFilter={hasReadFilter}
+          setHasReadFilter={setHasReadFilter}
+          searchFilter={searchFilter}
+          setSearchFilter={setSearchFilter}
         ></Filter>
         <div className="Bookshelf">
           <div
@@ -68,7 +67,14 @@ const Bookshelf = ({
           </div>
           {console.log(booksData)}
           {booksData.map((book) => {
-            return <Book hasReadFilter= {hasReadFilter} userId={userId} book={book}></Book>;
+            return (
+              <Book
+                searchFilter ={searchFilter}
+                hasReadFilter={hasReadFilter}
+                userId={userId}
+                book={book}
+              ></Book>
+            );
           })}
         </div>
       </div>

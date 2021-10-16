@@ -1,5 +1,4 @@
 .Bookshelf {
-
   margin: 0px auto;
   /* border: 1px solid black;  */
   display: flex;
@@ -8,14 +7,12 @@
   max-width: 900px;
   padding: 2%;
   justify-content: center;
-}
-
+}                      
 .add-card{
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 50px;
-
 }
 .plus{
   -webkit-transform: rotate(0deg);
