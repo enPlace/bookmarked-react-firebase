@@ -20,10 +20,12 @@ const Book = ({
 
   const checkFilter = (book) => {
     const regex = new RegExp(searchFilter, "i");
-    const typeFilterCheck =
-      book.name.match(regex) || book.author[0].match(regex);
+    const titleCheck = book.name.match(regex);
     const hasReadCheck = hasReadFilter === "all" || hasReadFilter === book.read;
-    return typeFilterCheck && hasReadCheck;
+    for(let i= 0; i<book.author.length; i++){
+      if(book.author[i].match(regex)) return true
+    }
+    return titleCheck && hasReadCheck;
   };
 
   return checkFilter(book) ? (
@@ -54,7 +56,10 @@ const Book = ({
         >
           <div className="top-info">{book.name}</div>
           <div className="bottom-info">{book.author}</div>
-          <div className="isbn">Identifier: {book.identifier}</div>
+          <div className="isbn">
+            {book.identifier && book.identifier.type}:{" "}
+            {book.identifier && book.identifier.identifier}
+          </div>
 
           <div className="has-read">
             <div>{book.read ? "Read" : "Not read"}</div>

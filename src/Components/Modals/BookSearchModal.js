@@ -23,11 +23,14 @@ const AddBookModal = ({
     setFirstResult(data.items[0]);
     setSearchResults(data);
     setShowHideModal("confirm-book");
+    setTitle("");
+    setIsbn("");
+    setAuthor("");
     return data;
   };
   return (
     <div
-      className={`modal ${showHideModal==="book-search" ? "active" : ""}`}
+      className={`modal ${showHideModal === "book-search" ? "active" : ""}`}
       id="add-book-modal"
     >
       <div className="modal-header">
