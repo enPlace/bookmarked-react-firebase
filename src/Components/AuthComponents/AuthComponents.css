@@ -1,0 +1,43 @@
+.authHeader {
+  width: 95vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.authHeader img {
+  border-radius: 50%;
+  width: 40px;
+}
+.authHeader img:hover{
+    cursor: pointer;
+}
+#userInfoModal{
+    position: absolute;
+    top: 100px;
+    right: 50px;
+    ;
+    z-index: 20;
+    background: rgb(43, 43, 43);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    padding:50px 30px 30px 30px;
+}
+
+.userInfoModal img{
+    margin-bottom: 30px;
+}
+.userInfoModal div{
+    margin: 10px;
+}
+.userInfoModal button{
+    margin-top: 30px;
+    width: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    background-color: rgb(31, 45, 250);
+    border: none;
+    color: white
+}

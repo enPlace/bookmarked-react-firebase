@@ -1,11 +1,12 @@
+
 .Bookshelf {
   margin: 0px auto;
-  /* border: 1px solid black;  */
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  max-width: 900px;
-  padding: 2%;
+  max-width: 1000px;
+ 
   justify-content: center;
 }                      
 .add-card{
@@ -34,9 +35,9 @@ transition-timing-function: ease-in-out;
 
 }
 .Book {
-  width: 145px;
-  height: 225px;
-  font-size: 80%;
+  width: 175px;
+  height: 250px;
+  font-size: 100%;
   /* border: 1px solid black; */
   margin: 10px;
   border-radius: 5px;
@@ -56,11 +57,12 @@ transition-timing-function: ease-in-out;
   transition: all 0.4s ease; */
   background-color: rgb(78, 78, 78);
   z-index: 5;
+  
 }
 .Book:hover button {
   background-color: transparent;
   color: white;
-  font-size: 18px;
+  font-size: 150%;
   transition: all 0.4s ease;
 }
 .avatar {
@@ -75,7 +77,7 @@ transition-timing-function: ease-in-out;
   position: absolute;
   z-index: 0;
   display: flex;
-  justify-content: center;
+  
   align-items: center;
   flex-direction: column;
   transition: ease 0.45s;
@@ -88,8 +90,10 @@ transition-timing-function: ease-in-out;
   opacity: 0.9;
   background-color: black;
   z-index: 10;
+ 
   /*  transform: scale(1); */
   transition: ease 0.45s;
+  overflow:auto;
 }
 .top-info {
   text-align: center;
@@ -103,12 +107,24 @@ transition-timing-function: ease-in-out;
   text-align: center;
   margin: 5px;
 }
-.close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
+.closeContainer{
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
-.close button {
+/* Hide scrollbar for Chrome, Safari and Opera */
+.card-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.card-content {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.closeContainer button {
   border: none;
   color: rgb(78, 78, 78);
   background-color: transparent;
@@ -198,6 +214,18 @@ input:checked + .slider:before {
     transition: all 0.4s ease;
     background-color: rgb(78, 78, 78);
     position: relative;
+  }
+  .card-content {
+    max-height: 91%;
+    justify-content: flex-start;
+  }
+  .close{
+    position: relative;
+    top: 2;
+    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

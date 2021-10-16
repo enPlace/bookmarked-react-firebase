@@ -8,12 +8,7 @@ import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
 import "./Components/Modals/Modals.css";
 import "./App.css";
-import {
-  getAuth,
-  signOut,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "@firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
 
 const App = () => {
   //firestore hooks
@@ -25,7 +20,6 @@ const App = () => {
   const [showHideModal, setShowHideModal] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
   const [firstResult, setFirstResult] = useState(false);
-
   const [searchReadStatus, setSearchReadStatus] = useState(false);
 
   const handleSignIn = async () => {
@@ -39,21 +33,37 @@ const App = () => {
     return <span>loading...</span>;
   } else if (!user) {
     return (
-      <div>
-        <button onClick={handleSignIn}>"Please sign in"</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <button
+          onClick={handleSignIn}
+          style={{
+            width: "100%",
+            height: "50px",
+            fontSize: "20px",
+            border:"none",
+            marginTop: "30px",
+            fontFamily: "Verdana, Geneva, Tahoma, sans-serif", 
+            color: "white",
+            backgroundColor:"rgb(31, 45, 250)",
+          }}
+        >
+          Sign in to get started
+        </button>
+        <p>(enable popups)</p>
       </div>
     );
   } else
     return (
       <div>
         {/*   <h1>Welcome Back, {user.displayName}!</h1> */}
-        <button
-          onClick={() => {
-            signOut(auth);
-          }}
-        >
-          sign out
-        </button>
+
         <FirestoreProvider sdk={firestoreInstance}>
           <Overlay
             showHideModal={showHideModal}

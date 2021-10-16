@@ -19,10 +19,7 @@ const BookSearchModal = ({
       dateAdded: serverTimestamp(),
       id: firstResult.id,
       imgsrc: `${volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail}`,
-      identifier: `${
-        volumeInfo.industryIdentifiers &&
-        volumeInfo.industryIdentifiers[0].identifier
-      }`,
+      identifier: !volumeInfo.industryIdentifiers ? null : volumeInfo.industryIdentifiers[0],
       name: `${volumeInfo.title}`,
       read: searchReadStatus,
     };

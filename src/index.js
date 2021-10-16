@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import AuthHeader from "./Components/AuthComponents/AuthHeader";
 import Header from "./Components/Header";
 import App from "./App";
 import { FirebaseAppProvider, AuthProvider, useFirebaseApp } from "reactfire";
@@ -18,6 +19,8 @@ const UserAuth = () =>{
   const auth = getAuth(useFirebaseApp());
   return (
     <AuthProvider sdk={auth}>
+       <AuthHeader/>
+      <Header></Header>
        <App />
     </AuthProvider>
   )
@@ -25,7 +28,6 @@ const UserAuth = () =>{
 
 render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-   <Header></Header>
    <UserAuth></UserAuth>
   </FirebaseAppProvider>,
   document.getElementById("root")
