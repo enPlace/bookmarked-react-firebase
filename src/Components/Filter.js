@@ -1,5 +1,5 @@
 import "./Filter.css";
-const Filter = ({ sortBy, setSortBy, viewCategory, setViewCategory }) => {
+const Filter = ({ setSortBy, hasReadFilter, setHasReadFilter }) => {
   return (
     <div id="form-container" class="search-bar">
       <form autocomplete="off" action="">
@@ -24,9 +24,7 @@ const Filter = ({ sortBy, setSortBy, viewCategory, setViewCategory }) => {
           <option value="z-a">z-a</option>
         </select>
       </form>
-      <form id="read-filter" onChange={(e) => {
-          setViewCategory(e.target.value)
-      }}>
+      <form id="read-filter">
         <div>view:</div>
 
         <input
@@ -34,7 +32,10 @@ const Filter = ({ sortBy, setSortBy, viewCategory, setViewCategory }) => {
           id="all"
           name="view"
           value="all"
-          checked={viewCategory === "all" ? "checked" : ""}
+          checked={hasReadFilter === "all" ? "checked" : ""}
+          onChange={() => {
+            setHasReadFilter("all");
+          }}
         />
         <label htmlFor="all">all</label>
         <input
@@ -42,7 +43,10 @@ const Filter = ({ sortBy, setSortBy, viewCategory, setViewCategory }) => {
           id="read"
           name="view"
           value="read"
-          checked={viewCategory === "read" ? "checked" : ""}
+          checked={hasReadFilter === true ? "checked" : ""}
+          onChange={() => {
+            setHasReadFilter(true);
+          }}
         />
         <label htmlFor="read">read</label>
         <input
@@ -50,7 +54,10 @@ const Filter = ({ sortBy, setSortBy, viewCategory, setViewCategory }) => {
           id="not-read"
           name="view"
           value="not-read"
-          checked={viewCategory === "not-read" ? "checked" : ""}
+          checked={hasReadFilter === false ? "checked" : ""}
+          onChange={() => {
+            setHasReadFilter(false);
+          }}
         />
         <label htmlFor="not-read">not read</label>
       </form>

@@ -9,7 +9,8 @@ const BookSearchModal = ({
   setShowBookListModal,
   firstResult,
   setSearchResults,
-  setFirstResult
+  setFirstResult,
+  searchReadStatus
 }) => {
   const firestore = useFirestore();
   const addBookToShelf = async () => {
@@ -23,12 +24,12 @@ const BookSearchModal = ({
         firstResult.industryIdentifiers[0].identifier
       }`,
       name: `${firstResult.title}`,
-      read: true,
+      read: searchReadStatus,
     };
     try {
       await setDoc(doc(firestore, userId, newBook.id), newBook);
      
-    } catch {}
+    } catch {console.error();}
   };
   return !searchResults ? null : (
     <div

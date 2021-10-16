@@ -5,7 +5,9 @@ const AddBookModal = ({
   setShowAddBookModal,
   setShowBookSearchModal,
   setSearchResults,
-  setFirstResult
+  setFirstResult,
+  searchReadStatus,
+  setSearchReadStatus,
 }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -19,10 +21,10 @@ const AddBookModal = ({
     }
     const data = await response.json();
 
-    setFirstResult(data.items[0].volumeInfo)
+    setFirstResult(data.items[0].volumeInfo);
     setSearchResults(data);
     setShowAddBookModal(false);
-    
+
     /* setFirstResult(data.items[0]) */
     setShowBookSearchModal(true);
     return data;
@@ -81,7 +83,16 @@ const AddBookModal = ({
             onChange={(e) => setIsbn(e.target.value)}
           />
           <div id="form-checkbox">
-            <input type="checkbox" name="cbox1" id="cbox1" className="inf" />
+            <input
+              type="checkbox"
+              name="cbox1"
+              id="cbox1"
+              className="inf"
+              checked={searchReadStatus ? "checked" : ""}
+              onChange = {(e)=>{
+                setSearchReadStatus(!searchReadStatus)
+              }}
+            />
             <label> I've already read this book</label>
           </div>
           <div className="add-button">

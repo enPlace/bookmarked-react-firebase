@@ -26,8 +26,9 @@ const App = () => {
   const [showBookListModal, setShowBookListModal] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
   const [firstResult, setFirstResult] = useState(false);
-  const [sortBy, setSortBy] = useState("newest");
-  const [viewCategory, setViewCategory] = useState("all");
+
+  const[searchReadStatus, setSearchReadStatus] = useState(false)
+ 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -36,10 +37,8 @@ const App = () => {
   };
 
   if (userStatus === "loading") {
-    console.log(user);
     return <span>loading...</span>;
   } else if (!user) {
-    console.log(user);
     return (
       <div>
         <button onClick={handleSignIn}>"Please sign in"</button>
@@ -48,8 +47,6 @@ const App = () => {
   } else
     return (
       <div>
-        {console.log("useridteat", user.uid)}
-
         <h1>Welcome Back, {user.displayName}!</h1>
         <button
           onClick={() => {
@@ -59,18 +56,14 @@ const App = () => {
           sign out
         </button>
         <FirestoreProvider sdk={firestoreInstance}>
-          <Filter
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            viewCategory={viewCategory}
-            setViewCategory={setViewCategory}
-          ></Filter>
           <AddBookModal
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
             setShowBookSearchModal={setShowBookSearchModal}
             setSearchResults={setSearchResults}
             setFirstResult={setFirstResult}
+            searchReadStatus={searchReadStatus} 
+            setSearchReadStatus ={setSearchReadStatus}
           />
           <BookSearchModal
             userId={user.uid}
@@ -82,6 +75,7 @@ const App = () => {
             firstResult={firstResult}
             setFirstResult={setFirstResult}
             setSearchResults={setSearchResults}
+            searchReadStatus = {searchReadStatus}
           />
           <BookListModal
             setShowAddBookModal={setShowAddBookModal}
@@ -95,8 +89,6 @@ const App = () => {
             userId={user.uid}
             showAddBookModal={showAddBookModal}
             setShowAddBookModal={setShowAddBookModal}
-            viewCategory = {viewCategory}
-            sortBy = {sortBy}
           ></Bookshelf>
         </FirestoreProvider>
       </div>

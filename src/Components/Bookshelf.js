@@ -3,20 +3,25 @@ import { useFirestore, useFirestoreCollectionData } from "reactfire";
 import { setDoc, doc, collection, query, orderBy } from "@firebase/firestore";
 import { defaultLibrary } from "../default";
 import Book from "./Book";
+import Filter from "./Filter";
 import "./Bookshelf.css";
 
-const Bookshelf = ({ userId, setShowAddBookModal, viewCategory, sortBy }) => {
-  //check to see if there is a collection with the user's id
-  // if it doesn't,
+const Bookshelf = ({
+  userId,
+  setShowAddBookModal,
 
+}) => {
   const firestore = useFirestore();
   const userBooks = collection(firestore, userId);
   const [booksQuery, setBooksQuery] = useState(
     query(userBooks, orderBy("dateAdded", "desc"))
   );
-  let { status, data: booksData } = useFirestoreCollectionData(booksQuery, {
+  const { status, data: booksData } = useFirestoreCollectionData(booksQuery, {
     idField: "id",
   });
+  const [sortBy, setSortBy] = useState("newest");
+  const [hasReadFilter, setHasReadFilter] = useState("all")
+ 
   const populateDefault = async (book, userId) => {
     const docData = book;
     await setDoc(doc(firestore, userId, book.id), docData);
@@ -30,7 +35,8 @@ const Bookshelf = ({ userId, setShowAddBookModal, viewCategory, sortBy }) => {
       )
     );
     setBooksQuery(newQuery);
-  }, [sortBy, userBooks]);
+  }, [sortBy]);
+
   if (status === "loading") {
     return <h1>Loading...</h1>;
   } else if (booksData[0] === undefined) {
@@ -44,19 +50,27 @@ const Bookshelf = ({ userId, setShowAddBookModal, viewCategory, sortBy }) => {
     );
   } else
     return (
-      <div className="Bookshelf">
-        <div
-          className="Book add-card"
-          onClick={() => {
-            setShowAddBookModal(true);
-          }}
-        >
-          <div className="plus">+</div>
+      <div className="container">
+        <Filter
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          hasReadFilter = {hasReadFilter}
+          setHasReadFilter = {setHasReadFilter}
+        ></Filter>
+        <div className="Bookshelf">
+          <div
+            className="Book add-card"
+            onClick={() => {
+              setShowAddBookModal(true);
+            }}
+          >
+            <div className="plus">+</div>
+          </div>
+          {console.log(booksData)}
+          {booksData.map((book) => {
+            return <Book hasReadFilter= {hasReadFilter} userId={userId} book={book}></Book>;
+          })}
         </div>
-        {console.log(booksData)}
-        {booksData.map((book) => {
-          return <Book userId={userId} book={book}></Book>;
-        })}
       </div>
     );
 };
