@@ -204,7 +204,7 @@ button {
   }
   #add-book-modal{
       max-width: 250px;
-      height: 375px;
+      height: 475px;
       padding: 10px;
       top: 40%;
   }
@@ -220,7 +220,7 @@ button {
   .title{margin-top: 5px; }
   #book-search-modal{
       max-width: 200px;
-      max-height: 425px;
+      max-height: 475px;
       padding: 50px;
   }#book-search-modal button{
       width: 70px;
