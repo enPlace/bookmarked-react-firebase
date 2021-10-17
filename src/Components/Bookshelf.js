@@ -15,6 +15,7 @@ import Filter from "./Filter";
 import "./Bookshelf.css";
 
 const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
+
   const firestore = useFirestore();
   const [userBooks, setUserBooks] = useState(collection(firestore, userId));
   const [booksQuery, setBooksQuery] = useState(
@@ -27,7 +28,7 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
   const [hasReadFilter, setHasReadFilter] = useState("all");
   const [searchFilter, setSearchFilter] = useState("");
   const [toDelete, setToDelete] = useState(false);
-  console.log(booksData);
+
   const handleDelete = async () => {
     await deleteDoc(doc(firestore, userId, toDelete));
   };
@@ -36,6 +37,7 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
     const docData = book;
     await setDoc(doc(firestore, userId, book.id), docData);
   };
+  
 
   useEffect(() => {
     const newQuery = query(
@@ -55,14 +57,17 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
     return (
       <div>
         populating library...
-        {defaultLibrary.map(async (book) => {
-          populateDefault(userId, book);
+        {defaultLibrary.forEach((book) => {
+         populateDefault(userId, book)
         })}
       </div>
     );
   } else
     return (
+      
       <div className="container">
+     
+        {console.log(booksData)}
         <ConfirmDeleteModal
           showHideModal={showHideModal}
           setShowHideModal={setShowHideModal}
