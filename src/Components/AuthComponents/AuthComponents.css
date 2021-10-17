@@ -7,6 +7,13 @@
 .authHeader img {
   border-radius: 50%;
   width: 40px;
+  border:3px solid transparent;
+  /* border-top: 3px solid rgb(47, 61, 255);
+  border-bottom: 3px solid rgb(47, 61, 255);
+  border-left: 3px solid white; 
+  border-right: 3px solid white;  */
+
+  
 }
 .authHeader img:hover{
     cursor: pointer;
