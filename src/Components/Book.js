@@ -22,10 +22,12 @@ const Book = ({
     const regex = new RegExp(searchFilter, "i");
     const titleCheck = book.name.match(regex);
     const hasReadCheck = hasReadFilter === "all" || hasReadFilter === book.read;
-    for(let i= 0; i<book.author.length; i++){
-      if(book.author[i].match(regex)) return true
+    if (hasReadCheck) {
+      for (let i = 0; i < book.author.length; i++) {
+        if (book.author[i].match(regex)) return true;
+      }
+      return titleCheck && hasReadCheck;
     }
-    return titleCheck && hasReadCheck;
   };
 
   return checkFilter(book) ? (

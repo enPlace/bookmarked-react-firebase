@@ -16,10 +16,18 @@ const AddBookModal = ({
     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchText}`;
     const response = await fetch(url);
     if (!response.ok) {
-      throw Error(response.status);
+      setTitle("");
+      setIsbn("");
+      setAuthor("");
+      return setShowHideModal("error");
     }
     const data = await response.json();
-
+    if (data.totalItems === 0) {
+      setTitle("");
+      setIsbn("");
+      setAuthor("");
+      return setShowHideModal("error");
+    }
     setFirstResult(data.items[0]);
     setSearchResults(data);
     setShowHideModal("confirm-book");

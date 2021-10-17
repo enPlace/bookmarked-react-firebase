@@ -3,11 +3,13 @@ import Bookshelf from "./Components/Bookshelf";
 import BookSearchModal from "./Components/Modals/BookSearchModal";
 import ConfirmBookModal from "./Components/Modals/ConfirmBookModal";
 import BookListModal from "./Components/Modals/BookListModal";
+import ErrorModal from "./Components/Modals/ErrorModal";
 import Overlay from "./Components/Modals/Overlay";
 import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
 import { useState } from "react";
 import "./Components/Modals/Modals.css";
 import "./App.css";
+import Icon from "./icon.png"
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "@firebase/auth";
 
 const App = () => {
@@ -47,16 +49,17 @@ const App = () => {
             width: "100%",
             height: "50px",
             fontSize: "20px",
-            border:"none",
+            border: "none",
             marginTop: "30px",
-            fontFamily: "Verdana, Geneva, Tahoma, sans-serif", 
+            fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
             color: "white",
-            backgroundColor:"rgb(31, 45, 250)",
+            backgroundColor: "rgb(31, 45, 250)",
           }}
         >
           Sign in to get started
         </button>
         <p>(enable popups)</p>
+        <img src={Icon} alt="" className = "main-icon" />
       </div>
     );
   } else
@@ -93,6 +96,10 @@ const App = () => {
             searchResults={searchResults}
             setFirstResult={setFirstResult}
           />
+          <ErrorModal
+            showHideModal={showHideModal}
+            setShowHideModal={setShowHideModal}
+          ></ErrorModal>
           <Bookshelf
             userId={user.uid}
             showHideModal={showHideModal}
