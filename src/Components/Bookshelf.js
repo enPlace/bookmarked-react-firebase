@@ -27,12 +27,12 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
   const [hasReadFilter, setHasReadFilter] = useState("all");
   const [searchFilter, setSearchFilter] = useState("");
   const [toDelete, setToDelete] = useState(false);
-
+  console.log(booksData);
   const handleDelete = async () => {
     await deleteDoc(doc(firestore, userId, toDelete));
   };
 
-  const populateDefault = async (book, userId) => {
+  const populateDefault = async (userId, book) => {
     const docData = book;
     await setDoc(doc(firestore, userId, book.id), docData);
   };
@@ -55,8 +55,8 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
     return (
       <div>
         populating library...
-        {defaultLibrary.forEach((book) => {
-          populateDefault(book, userId);
+        {defaultLibrary.map(async (book) => {
+          populateDefault(userId, book);
         })}
       </div>
     );
@@ -66,7 +66,7 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
         <ConfirmDeleteModal
           showHideModal={showHideModal}
           setShowHideModal={setShowHideModal}
-          handleDelete = {handleDelete}
+          handleDelete={handleDelete}
           setToDelete={setToDelete}
         />
         <Filter
@@ -86,18 +86,20 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
           >
             <div className="plus">+</div>
           </div>
-          {console.log(booksData)}
+
           {booksData.map((book) => {
-            return (
-              <Book
-                searchFilter={searchFilter}
-                hasReadFilter={hasReadFilter}
-                userId={userId}
-                book={book}
-                setShowHideModal={setShowHideModal}
-                setToDelete={setToDelete}
-              ></Book>
-            );
+            
+              return (
+                <Book
+                  key={book.id}
+                  searchFilter={searchFilter}
+                  hasReadFilter={hasReadFilter}
+                  userId={userId}
+                  book={book}
+                  setShowHideModal={setShowHideModal}
+                  setToDelete={setToDelete}
+                ></Book>
+              );
           })}
         </div>
       </div>

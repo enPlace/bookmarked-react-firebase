@@ -7,8 +7,8 @@ const Filter = ({
   setSearchFilter,
 }) => {
   return (
-    <div id="form-container" class="search-bar">
-      <form autocomplete="off" action="">
+    <div id="form-container" className="search-bar">
+      <form autoComplete="off" action="">
         <input
           id="search-bar"
           type="text"

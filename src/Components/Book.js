@@ -30,7 +30,7 @@ const Book = ({
     }
   };
 
-  return checkFilter(book) ? (
+  return book.id!=="hasVisited" && checkFilter(book) ? (
     <div className="Book">
       <img src={book.imgsrc} className="avatar" alt=""></img>
       <div className="card-content">

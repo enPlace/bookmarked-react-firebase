@@ -58,7 +58,7 @@ const App = () => {
         >
           Sign in to get started
         </button>
-        <p>(enable popups)</p>
+    
         <img src={Icon} alt="" className = "main-icon" />
       </div>
     );

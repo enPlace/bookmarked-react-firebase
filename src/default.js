@@ -2,6 +2,12 @@ import { serverTimestamp } from "@firebase/firestore";
 
 export const defaultLibrary = [
   {
+    hasVisited: true,
+    id:"hasVisited",
+    dateAdded: serverTimestamp()
+  },
+
+  {
     author: ["Robert C. Martin"],
     dateAdded: serverTimestamp(),
     id: "book00",
