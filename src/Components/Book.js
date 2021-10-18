@@ -18,10 +18,18 @@ const Book = ({
     );
   };
 
-  const checkFilter = (book) => {
-    const regex = new RegExp(searchFilter, "i");
-    const titleCheck = book.name.match(regex);
+  const checkFilter = (book, string) => {
+    //first take out partenthesis in search string and book title
+    string = string.replace(/[{()}]/g, "");
+    let title = book.name.replace(/[{()}]/g, "")
+    string = string.replace(/[\[\]']+/g, '');
+    title = title.replace(/[\[\]']+/g, '');
+
+
+    const regex = new RegExp(string, "i");
+    const titleCheck = regex.test(title);
     const hasReadCheck = hasReadFilter === "all" || hasReadFilter === book.read;
+    console.log(string)
     if (hasReadCheck) {
       for (let i = 0; i < book.author.length; i++) {
         if (book.author[i].match(regex)) return true;
@@ -30,7 +38,7 @@ const Book = ({
     }
   };
 
-  return book.id!=="hasVisited" && checkFilter(book) ? (
+  return book.id !== "hasVisited" && checkFilter(book, searchFilter) ? (
     <div className="Book">
       <img src={book.imgsrc} className="avatar" alt=""></img>
       <div className="card-content">
