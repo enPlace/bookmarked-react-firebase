@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useFirestore, useFirestoreCollectionData } from "reactfire";
+import { useFirestore, useFirestoreCollectionData, useFirebaseApp} from "reactfire";
+import { getAuth, signOut } from "@firebase/auth";
 import {
   setDoc,
   doc,
@@ -15,6 +16,7 @@ import Filter from "./Filter";
 import "./Bookshelf.css";
 
 const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
+  const auth = getAuth(useFirebaseApp());
 
   const firestore = useFirestore();
   const [userBooks, setUserBooks] = useState(collection(firestore, userId));
@@ -66,7 +68,14 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
     return (
       
       <div className="container">
-     
+          {/* <button
+        onClick={() => {
+          signOut(auth);
+          setShowHideModal(false)
+        }}
+      >
+        sign out
+      </button> */}
         {console.log(booksData)}
         <ConfirmDeleteModal
           showHideModal={showHideModal}

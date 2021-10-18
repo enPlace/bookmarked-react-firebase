@@ -5,7 +5,7 @@ import ConfirmBookModal from "./Components/Modals/ConfirmBookModal";
 import BookListModal from "./Components/Modals/BookListModal";
 import ErrorModal from "./Components/Modals/ErrorModal";
 import Overlay from "./Components/Modals/Overlay";
-import { useFirebaseApp, FirestoreProvider, useUser } from "reactfire";
+import { useFirebaseApp,  FirestoreProvider, useUser, useSigninCheck } from "reactfire";
 import { useState } from "react";
 import "./Components/Modals/Modals.css";
 import "./App.css";
@@ -16,8 +16,8 @@ const App = () => {
   //firestore hooks
   const firestoreInstance = getFirestore(useFirebaseApp());
   const auth = getAuth(useFirebaseApp());
-  const { userStatus, data: user } = useUser();
-
+  const { status, data: user } = useUser();
+  const signInStatus = useSigninCheck();
   //app states
   const [showHideModal, setShowHideModal] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
@@ -30,10 +30,10 @@ const App = () => {
       await signInWithPopup(auth, provider);
     } catch {}
   };
-
-  if (userStatus === "loading") {
+console.log(signInStatus)
+  if (signInStatus.status=== "loading") {
     return <span>loading...</span>;
-  } else if (!user) {
+  } else if (!signInStatus.data.signedIn||!user) {
     return (
       <div
         style={{

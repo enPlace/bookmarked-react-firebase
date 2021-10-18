@@ -2,7 +2,7 @@ import { useUser, useFirebaseApp } from "reactfire";
 import { getAuth, signOut } from "@firebase/auth";
 
 const UserInfoModal = ({user, showHideModal, setShowHideModal}) => {
-
+  console.log(user)
   const auth = getAuth(useFirebaseApp());
   return !showHideModal? null: (
       <div className="userInfoModal" id = "userInfoModal">
