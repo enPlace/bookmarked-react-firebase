@@ -64,18 +64,18 @@ button {
   width: 120px;
   height: 30px;
 }
-#add-book-modal {
+#book-search-modal {
   width: 300px;
   height: 450px;
 }
-#add-book-modal form{
+#book-search-modal form{
   margin-top: 20px;
 }
-#add-book-modal form input{
+#book-search-modal form input{
   margin-bottom: 20px;
 }
 
-#add-book-modal input {
+#book-search-modal input {
   width: 300px;
   height: 25px;
   font-size: 18px;
@@ -92,7 +92,7 @@ button {
   padding: 20px;
   width: 300px;
 }
-#book-search-modal{
+#confirm-book-modal{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -100,14 +100,14 @@ button {
   width: 300px;
   
 }
-#booksearch-img img{
+#confirm-book-img img{
   width: 150px;
 
 }
-#booksearch-author{
+#confirm-book-author{
   text-align: center;
 }
-#booksearch-title{
+#confirm-book-title{
   text-align: center;
 }
 #book-list-modal{
@@ -202,16 +202,16 @@ button {
       max-width: 300px ;
       padding: 10px;
   }
-  #add-book-modal{
+  #book-search-modal{
       max-width: 250px;
       height: 475px;
       padding: 10px;
       top: 40%;
   }
-  #add-book-modal br{
+  #book-search-modal br{
       display: none;
   }
-  #add-book-modal .modal-header{
+  #book-search-modal .modal-header{
       margin-bottom:10px;
   }
   .inf{

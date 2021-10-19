@@ -1,7 +1,7 @@
 import { setDoc,  doc, serverTimestamp } from "@firebase/firestore";
 import { useFirestore } from "reactfire";
 
-const BookSearchModal = ({
+const ConfirmBookMOdal = ({
   userId,
   searchResults,
   showHideModal,
@@ -31,7 +31,7 @@ const BookSearchModal = ({
   return !searchResults ? null : (
     <div
       className={`modal ${showHideModal ==="confirm-book" ? "active" : ""}`}
-      id="book-search-modal"
+      id="confirm-book-modal"
     >
       <div className="modal-header">
         <h1>Is this the book you're looking for? </h1>
@@ -43,25 +43,25 @@ const BookSearchModal = ({
         </button>
       </div>
 
-      <div id="booksearch-img">
+      <div id="confirm-book-img">
         <img
           src={volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail}
           alt=""
         />
       </div>
-      <div id="booksearch-title" className="info">
+      <div id="confirm-book-title" className="info">
         {volumeInfo.title}
       </div>
       {volumeInfo.authors &&
         volumeInfo.authors.map((author) => {
           return (
-            <div id="booksearch-author" className="info">
+            <div id="confirm-book-author" className="info">
               {author}
             </div>
           );
         })}
       {volumeInfo.industryIdentifiers && (
-        <div id="booksearch-isbn" className="info">
+        <div id="confirm-book-isbn" className="info">
           Identifier: {volumeInfo.industryIdentifiers[0].identifier} (
           {volumeInfo.industryIdentifiers[0].type})
         </div>
@@ -93,4 +93,4 @@ const BookSearchModal = ({
   );
 };
 
-export default BookSearchModal;
+export default ConfirmBookMOdal;

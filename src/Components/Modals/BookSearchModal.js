@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddBookModal = ({
+const BookSearchModal = ({
   showHideModal,
   setShowHideModal,
   setSearchResults,
@@ -39,7 +39,7 @@ const AddBookModal = ({
   return (
     <div
       className={`modal ${showHideModal === "book-search" ? "active" : ""}`}
-      id="add-book-modal"
+      id="book-search-modal"
     >
       <div className="modal-header">
         <h1>Add a new book </h1>
@@ -95,17 +95,18 @@ const AddBookModal = ({
               name="cbox1"
               id="cbox1"
               className="inf"
+              style = {{marginTop: "15px"}}
               checked={searchReadStatus ? "checked" : ""}
               onChange={(e) => {
                 setSearchReadStatus(!searchReadStatus);
               }}
             />
-            <label> I've already read this book</label>
+            <p> I've already read this book</p>
           </div>
           <div className="add-button">
             <button
               type="submit"
-              id="add-book-button"
+              id="book-search-button"
               value="on/off"
               onClick={(e) => {
                 e.preventDefault();
@@ -121,4 +122,4 @@ const AddBookModal = ({
   );
 };
 
-export default AddBookModal;
+export default BookSearchModal;
