@@ -1,5 +1,5 @@
 import { getFirestore } from "@firebase/firestore";
-import Bookshelf from "./Components/Bookshelf";
+import Bookshelf from "./Components/BookDisplayComponents/Bookshelf";
 import BookSearchModal from "./Components/Modals/BookSearchModal";
 import ConfirmBookModal from "./Components/Modals/ConfirmBookModal";
 import BookListModal from "./Components/Modals/BookListModal";
@@ -16,13 +16,13 @@ const App = () => {
   //firestore hooks
   const firestoreInstance = getFirestore(useFirebaseApp());
   const auth = getAuth(useFirebaseApp());
-  const { status, data: user } = useUser();
+  const { data: user } = useUser();
   const signInStatus = useSigninCheck();
   //app states
   const [showHideModal, setShowHideModal] = useState(false);
-  const [searchResults, setSearchResults] = useState(false);
-  const [firstResult, setFirstResult] = useState(false);
-  const [searchReadStatus, setSearchReadStatus] = useState(false);
+  const [searchResults, setSearchResults] = useState(false); // googlebooks API results
+  const [firstResult, setFirstResult] = useState(false); //result to be confirmed and added
+  const [searchReadStatus, setSearchReadStatus] = useState(false); //value for if user has read book to add
 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -30,7 +30,6 @@ const App = () => {
       await signInWithPopup(auth, provider);
     } catch {}
   };
-console.log(signInStatus)
   if (signInStatus.status=== "loading") {
     return <span>loading...</span>;
   } else if (!signInStatus.data.signedIn||!user) {
@@ -65,8 +64,6 @@ console.log(signInStatus)
   } else
     return (
       <div>
-        {/*   <h1>Welcome Back, {user.displayName}!</h1> */}
-
         <FirestoreProvider sdk={firestoreInstance}>
           <Overlay
             showHideModal={showHideModal}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useFirestore, useFirestoreCollectionData, useFirebaseApp} from "reactfire";
-import { getAuth, signOut } from "@firebase/auth";
+import { useFirestore, useFirestoreCollectionData} from "reactfire";
+/* import { getAuth, signOut } from "@firebase/auth"; */
 import {
   setDoc,
   doc,
@@ -9,14 +9,13 @@ import {
   query,
   orderBy,
 } from "@firebase/firestore";
-import { defaultLibrary } from "../default";
+import { defaultLibrary } from "../../default";
 import Book from "./Book";
-import ConfirmDeleteModal from "./Modals/ConfirmDeleteModal";
+import ConfirmDeleteModal from "../Modals/ConfirmDeleteModal";
 import Filter from "./Filter";
 import "./Bookshelf.css";
 
 const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
-  const auth = getAuth(useFirebaseApp());
 
   const firestore = useFirestore();
   const [userBooks, setUserBooks] = useState(collection(firestore, userId));
@@ -66,7 +65,6 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
     );
   } else
     return (
-      
       <div className="container">
           {/* <button
         onClick={() => {
@@ -102,7 +100,6 @@ const Bookshelf = ({ userId, setShowHideModal, showHideModal }) => {
           </div>
 
           {booksData.map((book) => {
-            
               return (
                 <Book
                   key={book.id}
